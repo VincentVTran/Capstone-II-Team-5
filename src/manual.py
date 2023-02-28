@@ -96,8 +96,6 @@ class FrontEnd(object):
             body_center_y = center_y
             z_area = 0
 
-            bodies=targetBody(bodies)
-
             for body in bodies:
                 (x, y, w, h) = body
                 cv2.rectangle(frame,(x, y),(x + w, y + h),(255, 255, 0), 2)
