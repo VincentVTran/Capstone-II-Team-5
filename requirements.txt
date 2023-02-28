@@ -2,8 +2,4 @@ djitellopy
 av
 pillow
 opencv-python
-<<<<<<< HEAD
 pygame
-=======
-pygame
->>>>>>> controller

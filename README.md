@@ -1,12 +1,5 @@
-# Capstone II Final Porject Team 14
-The aim of this project is to bring facial tracking technology to drones. 
-This will be accomplished by the development of a computer vision algorithm 
-for facial detection that will interface with and control the drone. The 
-drone’s camera will communicate with a Haar cascade object detection model to 
-gather information about the presence and location of a human face and make 
-decisions about how the drone should be maneuvered to locate and track the 
-face. The development of the technology in this project will have benefits for 
-surveillance, tracking, and the film industry.
+# Capstone II Final Porject Team 15
+The primary problem to be solved by this project is a lack of comprehensive drone tracking coupled with VR integrations. Computer vision has shown to be a powerful tool when integrated with other use cases. Still, all-inclusive computer vision technologies with added drone compatibility have had limited applications thus far. Users not physically present in a space may want to venture into it without going in person. These people do not have great, fully immersive options, let alone a cost-effective solution that allows them to explore a space in virtual reality. Our project aims to solve these problems. Our goal is to end up with a fully autonomous tracking system that can follow a guide through space and transmit the camera data and feature analysis to a user using an Oculus Quest 2 headset. This would allow for better controlled autonomous drone flight for filming, remote viewing of places, and providing more immersive digital tours. The approach designed to accomplish this is to program a Parrot AR.Drone 2.0 to remotely communicate with a host computer, which will analyze the video content, provide real-time feature analysis, and stream the video feedback to the Oculus.
 
 ## Contents
 1. [Environment Setup](#environment-setup)
@@ -16,7 +9,7 @@ surveillance, tracking, and the film industry.
 
 - Clone the repository
 ```
-git clone git@github.com:aefuente/dronemalone.git capstone && cd capstone
+git clone https://github.com/VincentVTran/Capstone-II-Team5.git capstone && cd capstone
 export capstone=$PWD
 ```
 - Setup python environment  
@@ -28,11 +21,11 @@ conda create -n capstone python=3.10
 conda activate capstone
 pip install -r requirements.txt
 ```
-
+- If you're on Windows, make sure to use Anaconda Prompt instead of your default terminal.
 ## Demo
 - [Setup](#environment-setup) your environment
 - Run `src/main.py`
 ```
 cd $capstone
-python3 ./src/main.py
+python ./src/auto.py
 ```
