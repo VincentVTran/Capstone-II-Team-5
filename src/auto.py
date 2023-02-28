@@ -113,7 +113,7 @@ class FrontEnd(object):
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             bodies = body_cascade.detectMultiScale(gray, 1.3, minNeighbors=5)
 
-            # If a face is recognized, add to list of faces and draw indicators to frame around face
+            # If a body is recognized, add to list of faces and draw indicators to frame around face
             body_center_x = center_x
             body_center_y = center_y
             z_area = 0
