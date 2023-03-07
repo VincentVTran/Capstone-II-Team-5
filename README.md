@@ -22,16 +22,16 @@ The primary problem to be solved by this project is a lack of comprehensive dron
 git clone https://github.com/VincentVTran/Capstone-II-Team5.git capstone && cd capstone
 export capstone=$PWD
 ```
-- Setup python environment  
-This project uses conda package manager. For details on how to install conda
+- Setup python environment.
+- This project uses conda package manager. For details on how to install conda
 visit https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html 
+- If you're on Windows, make sure to use Anaconda Prompt instead of your default terminal.
 
 ```
 conda create -n capstone python=3.10
 conda activate capstone
 pip install -r requirements.txt
 ```
-- If you're on Windows, make sure to use Anaconda Prompt instead of your default terminal.
 ## Demo
 - [Setup](#environment-setup) your environment
 - [To run automated drone navigation] Run `src/auto.py`
