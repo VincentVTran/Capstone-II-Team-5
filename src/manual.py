@@ -13,7 +13,7 @@ S = 60
 FPS = 120
 SCREEN_WIDTH = 960
 SCREEN_HEIGHT = 720
-face_cascade = cv2.CascadeClassifier('./src/cascades/haarcascade_frontalface_default.xml')
+upperbody_cascade = cv2.CascadeClassifier('./src/cascades/haarcascade_upperbody.xml')
 # Calculate center of frame
 center_x = int(SCREEN_WIDTH/2)
 center_y = int(SCREEN_HEIGHT/2)
@@ -76,7 +76,7 @@ class FrontEnd(object):
             if frame_read.stopped:
                 break
 
-            #Face Detection Begins
+            #Upperbody Detection Begins
             self.screen.fill([0, 0, 0])
             #----------------------------
             frame = frame_read.frame
@@ -86,26 +86,26 @@ class FrontEnd(object):
             # Draw circle at center of the frame
             cv2.circle(frame, (center_x, center_y), 10, (0, 255, 0))
 
-            # Convert frame to grayscale in order to apply the haar cascade for face identification
+            # Convert frame to grayscale in order to apply the haar cascade for upperbody identification
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray, 1.3, minNeighbors=5)
+            upperbodies = upperbody_cascade.detectMultiScale(gray, 1.3, minNeighbors=5)
 
-            # If a face is recognized, add to list of faces and draw indicators to frame around face
-            face_center_x = center_x
-            face_center_y = center_y
+            # If an upperbody is recognized, add to list of upperbodies and draw indicators to frame around upperbody
+            upperbody_center_x = center_x
+            upperbody_center_y = center_y
             z_area = 0
-            for face in faces:
-                (x, y, w, h) = face
+            z_area = 0
+            for upperbody in upperbodies:
+                (x, y, w, h) = upperbody
                 cv2.rectangle(frame,(x, y),(x + w, y + h),(255, 255, 0), 2)
 
-                face_center_x = x + int(h/2)
-                face_center_y = y + int(w/2)
+                upperbody_center_x = x + int(h/2)
+                upperbody_center_y = y + int(w/2)
                 z_area = w * h
-                cv2.circle(frame, (face_center_x, face_center_y), 10, (0, 0, 255))
-
-            # Calculate recognized face offset from center
-            offset_x = face_center_x - center_x
-            offset_y = face_center_y - center_y
+                cv2.circle(frame, (upperbody_center_x, upperbody_center_y), 10, (0, 0, 255))
+            # Calculate recognized upperbody offset from center
+            offset_x = upperbody_center_x - center_x
+            offset_y = upperbody_center_y - center_y
 
             cv2.putText(frame, f'[{offset_x}, {offset_y}, {z_area}]', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
             
