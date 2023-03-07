@@ -24,8 +24,20 @@ pip install -r requirements.txt
 - If you're on Windows, make sure to use Anaconda Prompt instead of your default terminal.
 ## Demo
 - [Setup](#environment-setup) your environment
-- Run `src/main.py`
+- [To run automated drone navigation] Run `src/auto.py`
 ```
 cd $capstone
 python ./src/auto.py
+```
+
+- [To run manual drone navigation] Run `src/manual.py`
+```
+cd $capstone
+python ./src/manual.py
+```
+
+- [To test cv model locally with webcam] Run `src/webcam_cv_test.py`
+```
+cd $capstone
+python ./src/webcam_cv_test.py
 ```
