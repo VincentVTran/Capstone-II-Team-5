@@ -51,3 +51,10 @@ python ./src/manual.py
 cd $capstone
 python ./src/webcam_cv_test.py
 ```
+
+- [To test cv model locally with webcam and printed drone instructions] Run `src/print_movements.py`
+```
+cd $capstone
+python ./src/print_movements.py
+```
+
