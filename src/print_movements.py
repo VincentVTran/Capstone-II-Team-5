@@ -144,7 +144,26 @@ class FrontEnd(object):
             #print(response)
 
             cv2.putText(frame, f'[{offset_x}, {offset_y}, {z_area}]', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
-            
+
+            if (self.left_right_velocity < 0):
+                cv2.putText(frame, "Drone Instruction: Go Left", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.left_right_velocity > 0):
+                cv2.putText(frame, "Drone Instruction: Go Right", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.for_back_velocity < 0):
+                cv2.putText(frame, "Drone Instruction: Go Backwards", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.for_back_velocity > 0):
+                cv2.putText(frame, "Drone Instruction: Go Forwards", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.up_down_velocity < 0):
+                cv2.putText(frame, "Drone Instruction: Descend", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.up_down_velocity > 0):
+                cv2.putText(frame, "Drone Instruction: Ascend", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.yaw_velocity > 0):
+                cv2.putText(frame, "Drone Instruction: Yaw Counter-Clockwise", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.yaw_velocity < 0):
+                cv2.putText(frame, "Drone Instruction: Yaw Clockwise", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            else:
+                cv2.putText(frame, "Drone Instruction: Hover", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+
             # Write the output video 
             out.write(frame.astype('uint8'))
 
@@ -173,7 +192,8 @@ class FrontEnd(object):
 
     def update(self):
         if self.send_rc_control:
-            print("Sending Velocities", self.left_right_velocity, self.for_back_velocity,self.up_down_velocity, self.yaw_velocity)
+            # print("Sending Velocities", self.left_right_velocity, self.for_back_velocity,self.up_down_velocity, self.yaw_velocity)
+            pass
 
 
 def main():
