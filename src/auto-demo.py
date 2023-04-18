@@ -19,6 +19,7 @@ upperbody_cascade = cv2.CascadeClassifier('./src/cascades/haarcascade_upperbody.
 center_x = int(SCREEN_WIDTH/2)
 center_y = int(SCREEN_HEIGHT/2)
 
+
 #function to take in list of upperbodies and remove all but the one with the largest area
 def targetUpperbodies(Upperbodies):
     Upperbodies=list(Upperbodies)
@@ -62,6 +63,15 @@ class FrontEnd(object):
         pygame.time.set_timer(pygame.USEREVENT + 1, 1000 // FPS)
 
     def run(self):
+
+        cv2.startWindowThread()
+
+        # the output will be written to output.avi
+        out = cv2.VideoWriter(
+            'drone_demo.avi',
+            cv2.VideoWriter_fourcc(*'MJPG'),
+            15.,
+            (SCREEN_WIDTH,SCREEN_HEIGHT))
 
         self.drone.connect()
         self.drone.set_speed(self.speed)
@@ -149,13 +159,33 @@ class FrontEnd(object):
             cv2.putText(frame, f'[{offset_x}, {offset_y}, {z_area}]', (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
             
             text = "Battery: {}%".format(self.drone.get_battery())
-            cv2.putText(frame, text, (5, 720 - 5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            cv2.putText(frame, text, (5, 650 - 5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+            if (self.left_right_velocity < 0):
+                cv2.putText(frame, "Drone Instruction: Go Left", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.left_right_velocity > 0):
+                cv2.putText(frame, "Drone Instruction: Go Right", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.for_back_velocity < 0):
+                cv2.putText(frame, "Drone Instruction: Go Backwards", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.for_back_velocity > 0):
+                cv2.putText(frame, "Drone Instruction: Go Forwards", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.up_down_velocity < 0):
+                cv2.putText(frame, "Drone Instruction: Descend", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.up_down_velocity > 0):
+                cv2.putText(frame, "Drone Instruction: Ascend", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.yaw_velocity > 0):
+                cv2.putText(frame, "Drone Instruction: Yaw Counter-Clockwise", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            elif (self.yaw_velocity < 0):
+                cv2.putText(frame, "Drone Instruction: Yaw Clockwise", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+            else:
+                cv2.putText(frame, "Drone Instruction: Hover", (10, 700), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             frame = np.rot90(frame)
             frame = np.flipud(frame)
 
             frame = pygame.surfarray.make_surface(frame)
             self.screen.blit(frame, (0, 0))
+            # Write the output video 
+            out.write(frame.astype('uint8'))
             pygame.display.update()
 
             time.sleep(1 / FPS)
