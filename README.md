@@ -40,7 +40,7 @@ cd $capstone
 python ./src/auto.py
 ```
 
-- [To run automated drone navigation with a recorded demo] Run `src/auto-demo.py`
+- [To run automated drone navigation and record a demo] Run `src/auto-demo.py`
 ```
 cd $capstone
 python ./src/auto-demo.py
