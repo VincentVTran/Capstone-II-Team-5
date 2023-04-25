@@ -30,7 +30,7 @@ def targetUpperbodies(Upperbodies):
             if w*h > max:
                 max=w*h
                 maxIndex=i
-        return [np.array(upperbody[maxIndex])]
+        return [np.array(Upperbodies[maxIndex])]
     return np.array([])
 
 class FrontEnd(object):
@@ -117,7 +117,7 @@ class FrontEnd(object):
             upperbody_center_y = center_y
             z_area = 0
 
-            # upperbodies=targetUpperbodies(upperbodies)
+            upperbodies=targetUpperbodies(upperbodies)
 
             for upperbody in upperbodies:
                 (x, y, w, h) = upperbody

@@ -13,7 +13,8 @@ cv2.startWindowThread()
 
 # open webcam video stream
 cap = cv2.VideoCapture(0)
-# the output will be written to output.avi
+
+# the output will be written to webcam_test.avi
 out = cv2.VideoWriter(
     'webcam_test.avi',
     cv2.VideoWriter_fourcc(*'MJPG'),
@@ -32,7 +33,7 @@ while(True):
 
     # Convert frame to grayscale in order to apply the haar cascade for upperbody identification
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    upperbodies = upperbody_cascade.detectMultiScale(gray, 1.3, minNeighbors=5)
+    upperbodies = upperbody_cascade.detectMultiScale(gray, 1.3, minNeighbors=3)
 
     # If an upperbody is recognized, add to list of upperbodies and draw indicators to frame around upperbody
     upperbody_center_x = center_x
