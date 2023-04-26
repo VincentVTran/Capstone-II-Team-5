@@ -48,9 +48,9 @@ def IDLE():
         next_state = 5 #MOVE_LEFT #5
     elif X > 0 + 200:
         next_state = 6 #MOVE_RIGHT #6
-    elif ROI > 40000 and ROI != 0:
+    elif ROI > 50000 and ROI != 0:
         next_state = 10 # MOVE_BACKWARD #10
-    elif ROI < 20000 and ROI !=0:
+    elif ROI < 30000 and ROI !=0:
         next_state = 9 #MOVE_FORWARD #9
     elif Y < 0 - 25:
         next_state = 8 #MOVE_UP #8
@@ -69,7 +69,7 @@ def MOVE_LEFT():
     global next_state
     next_state = 4
     command = "left 20"
-    return (-20,0,0,0)
+    return (0,0,0,-40)
     
 
 def MOVE_RIGHT():
@@ -77,7 +77,7 @@ def MOVE_RIGHT():
     global next_state
     next_state = 4
     command = "right 20"
-    return (20,0,0,0)
+    return (0,0,0,40)
     
 
 def MOVE_DOWN():
@@ -100,14 +100,14 @@ def MOVE_FORWARD():
     global next_state
     next_state = 4
     command = "forward 20"
-    return (0,20,0,0)
+    return (0,40,0,0)
 
 def MOVE_BACKWARD():
     #print("MOVE_BACKWARD_STATE")
     global next_state
     next_state = 4
     command = "back 20"
-    return (0,-20,0,0)
+    return (0,-40,0,0)
 
 states = {
     1: INIT, 
